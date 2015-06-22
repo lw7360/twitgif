@@ -1,0 +1,3 @@
+[submodule "videoconverter.js"]
+	path = videoconverter.js
+	url = https://github.com/lw7360/videoconverter.js.git
