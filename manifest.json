@@ -1,6 +1,6 @@
 {
   "name": "TwitGif",
-  "description": 'Convert Twitter "gifs" to real gifs.',
+  "description": "Convert Twitter \"gifs\" to real gifs.",
   "version": "0.1",
   "permissions": ["contextMenus"],
   "background": {
