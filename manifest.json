@@ -2,9 +2,12 @@
   "name": "TwitGif",
   "description": "Convert Twitter \"gifs\" to real gifs.",
   "version": "0.1",
-  "permissions": ["contextMenus"],
+  "permissions": [
+    "contextMenus",
+    "*://*/*" 
+  ],
   "background": {
-    "scripts": ["main.js"]
+    "scripts": ["videoconverter.js/ffmpeg-all-codecs.js", "main.js", "converter.js"]
   },
   "manifest_version": 2
 }
