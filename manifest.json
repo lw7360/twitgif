@@ -1,0 +1,10 @@
+{
+  "name": "TwitGif",
+  "description": 'Convert Twitter "gifs" to real gifs.',
+  "version": "0.1",
+  "permissions": ["contextMenus"],
+  "background": {
+    "scripts": ["main.js"]
+  },
+  "manifest_version": 2
+}
