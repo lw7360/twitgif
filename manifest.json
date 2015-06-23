@@ -7,7 +7,7 @@
     "*://*/*" 
   ],
   "background": {
-    "scripts": ["videoconverter.js/ffmpeg-all-codecs.js", "main.js", "converter.js"]
+    "scripts": ["videoconverter.js/ffmpeg.js", "main.js"]
   },
   "manifest_version": 2
 }
