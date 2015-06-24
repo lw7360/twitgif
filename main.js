@@ -17,15 +17,42 @@ function Uint8ToString(u8a){
   return c.join("");
 }
 
+function b64toBlob(b64Data, contentType, sliceSize) {
+  contentType = contentType || '';
+  sliceSize = sliceSize || 512;
+
+  var byteCharacters = atob(b64Data);
+  var byteArrays = [];
+
+  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+    var byteNumbers = new Array(slice.length);
+    for (var i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    var byteArray = new Uint8Array(byteNumbers);
+
+    byteArrays.push(byteArray);
+  }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
+
 function getDownloadLink(fileName, fileData) {
   var pom = document.createElement('a');
   var b64encoded = btoa(Uint8ToString(fileData));
-  pom.setAttribute('href', 'data:image/gif;base64,' + b64encoded);
+  var blob = b64toBlob(b64encoded, "image/gif");
+  var url = window.URL.createObjectURL(blob);
+  pom.setAttribute('href', url);
   pom.setAttribute('download', fileName);
 
   document.body.appendChild(pom);
   pom.click();
   document.body.removeChild(pom);
+  window.URL.revokeObjectURL(url);
 }
 
 function getVideo(url) {
@@ -45,8 +72,8 @@ function getVideo(url) {
 }
 
 function convertVideo(video) {
-  args = ["-i", "twitgif.webm", "-vf", "showinfo", "-nostdin", "-strict", "-2", "output.gif"];
-  file = [{data: video, name: "twitgif.webm"}];
+  args = ["-i", "twitgif", "-nostdin", "-strict", "-2", "twitgif.gif"];
+  file = [{data: video, name: "twitgif"}];
 
   var results = ffmpeg_run({
     arguments: args,
