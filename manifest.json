@@ -7,7 +7,7 @@
     "*://*/*" 
   ],
   "background": {
-    "scripts": ["videoconverter.js/ffmpeg.js", "main.js"]
+    "scripts": ["patch-worker.js", "videoconverter.js/ffmpeg.js", "main.js"]
   },
   "manifest_version": 2
 }

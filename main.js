@@ -72,13 +72,13 @@ function getVideo(url) {
 }
 
 function convertVideo(video) {
-  args = ["-i", "twitgif", "-nostdin", "-strict", "-2", "twitgif.gif"];
-  file = [{data: video, name: "twitgif"}];
+  var Module = {
+    arguments: ["-i", "twitgif", "-nostdin", "-strict", "-2", "twitgif.gif"],
+    files: [{data: video, name: "twitgif"}],
+    TOTAL_MEMORY: 268435456
+  }
 
-  var results = ffmpeg_run({
-    arguments: args,
-    files: file
-  });
+  var results = ffmpeg_run(Module);
 
   results.forEach(function(file) {
     console.log("File recieved", file.name, file.data);
