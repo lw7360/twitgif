@@ -78,7 +78,7 @@ function convertVideo(video) {
     TOTAL_MEMORY: 268435456
   }
 
-  var results = ffmpeg_run({Module});
+  var results = ffmpeg_run(Module);
 
   results.forEach(function(file) {
     console.log("File recieved", file.name, file.data);
