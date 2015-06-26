@@ -1,11 +1,18 @@
 var videoData;
+var worker = new Worker(chrome.runtime.getURL('worker.js'));
+
+worker.onmessage = function(event) {
+  var message = event.data;
+
+  getDownloadLink(message.fileName, message.data);
+};
 
 function genericOnClick(info, tab) {
   console.log("info: " + JSON.stringify(info));
   console.log("tab: " + JSON.stringify(tab));
   console.log(info["srcUrl"]);
   
-  getVideo(info["srcUrl"]);
+  worker.postMessage(info["srcUrl"]);
 }
 
 function Uint8ToString(u8a){
@@ -53,38 +60,6 @@ function getDownloadLink(fileName, fileData) {
   pom.click();
   document.body.removeChild(pom);
   window.URL.revokeObjectURL(url);
-}
-
-function getVideo(url) {
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", url, true);
-  oReq.responseType = "arraybuffer";
-
-  oReq.onload = function(oEvent) {
-    var arrayBuffer = oReq.response;
-    if (arrayBuffer) {
-      videoData = new Uint8Array(arrayBuffer);
-      convertVideo(videoData);
-    }
-  }
-
-  oReq.send();
-}
-
-function convertVideo(video) {
-  var Module = {
-    arguments: ["-i", "twitgif", "-nostdin", "-strict", "-2", "twitgif.gif"],
-    files: [{data: video, name: "twitgif"}],
-    TOTAL_MEMORY: 268435456
-  }
-
-  var results = ffmpeg_run(Module);
-
-  results.forEach(function(file) {
-    console.log("File recieved", file.name, file.data);
-    var data = new Uint8Array(file.data);
-    getDownloadLink(file.name, data);
-  });
 }
 
 chrome.contextMenus.create({

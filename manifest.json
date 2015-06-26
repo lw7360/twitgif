@@ -7,7 +7,8 @@
     "*://*/*" 
   ],
   "background": {
-    "scripts": ["patch-worker.js", "videoconverter.js/ffmpeg.js", "main.js"]
+    "scripts": ["worker_proxy.js", "videoconverter.js/ffmpeg.js", "main.js"]
   },
+  "web_accessible_resources": ["worker_proxy.html"],
   "manifest_version": 2
 }
