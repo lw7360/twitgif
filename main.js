@@ -66,5 +66,5 @@ chrome.contextMenus.create({
   "title": "TwitGif", 
   "contexts":["video"], 
   "onclick": genericOnClick,
-  "documentUrlPatterns": ["*://twitter.com/*"]
+  // "documentUrlPatterns": ["*://twitter.com/*"]
 });
