@@ -18,7 +18,7 @@ function getVideo(url) {
 
 function convertVideo(video) {
   var Module = {
-    arguments: ["-i", "twitgif", "-nostdin", "-strict", "-2", "twitgif.gif"],
+    arguments: ["-i", "twitgif", "-nostdin", "-vf", "scale=400:-1", "-gifflags", "+transdiff", "-y", "-strict", "-2", "twitgif.gif"],
     files: [{data: video, name: "twitgif"}],
     TOTAL_MEMORY: 268435456
   }
